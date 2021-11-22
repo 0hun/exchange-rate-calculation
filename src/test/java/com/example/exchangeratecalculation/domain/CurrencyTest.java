@@ -11,11 +11,10 @@ public class CurrencyTest {
     @Test
     void createCurrency() {
         // given
-        String nation = "KRW";
         double exchangeRate = 1121.419945;
 
         // when
-        Currency currency = new Currency(nation, exchangeRate);
+        Currency currency = new Currency(Country.KRW, exchangeRate);
 
         // then
         assertThat(currency).isNotNull();
@@ -25,12 +24,11 @@ public class CurrencyTest {
     @Test
     void calculateExchangeRate() {
         // given
-        String nation = "KRW";
         double exchangeRate = 1121.419945;
         int remittance = 100;
 
         // when
-        Currency currency = new Currency(nation, exchangeRate);
+        Currency currency = new Currency(Country.KRW, exchangeRate);
 
         double amount = currency.calculateAmount(remittance);
 
