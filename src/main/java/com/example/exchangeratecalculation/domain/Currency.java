@@ -5,12 +5,12 @@ import lombok.Getter;
 @Getter
 public class Currency {
 
-    private final String nation;
+    private final Country country;
 
     private final double exchangeRate;
 
-    public Currency(String nation, double exchangeRate) {
-        this.nation = nation;
+    public Currency(Country country, double exchangeRate) {
+        this.country = country;
         this.exchangeRate = exchangeRate;
     }
 
