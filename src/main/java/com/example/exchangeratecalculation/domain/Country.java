@@ -1,6 +1,7 @@
 package com.example.exchangeratecalculation.domain;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 import lombok.Getter;
 
 @Getter
@@ -26,5 +27,11 @@ public enum Country {
             .filter(country -> country.code.equals(code))
             .findFirst()
             .orElseThrow(IllegalArgumentException::new);
+    }
+
+    public static String currencies() {
+        return Arrays.stream(values())
+            .map(country -> country.name())
+            .collect(Collectors.joining(","));
     }
 }
