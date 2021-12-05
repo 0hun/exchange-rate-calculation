@@ -2,22 +2,26 @@ package com.example.exchangeratecalculation.infra;
 
 import static com.example.exchangeratecalculation.domain.Country.currencies;
 
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-@Slf4j
-@Service
+@Component
 public class CurrencyLayerClient implements CurrencyClient {
 
-    private static String API_URL = "apilayer.net/api/live";
+    @Value("${current.api.url}")
+    private String apiUrl;
 
-    private static String ACCESS_KEY = "0316b184353714829e79360266352c54";
+    @Value("${current.api.accesskey}")
+    private String accessKey;
 
-    private static String SOURCE = "USD";
+    @Value("${current.api.source}")
+    private String source;
 
-    private static int FORMAT = 1;
+    @Value("${current.api.format}")
+    private String format;
 
     @Override
     public String currentCurrencies() {
@@ -29,11 +33,11 @@ public class CurrencyLayerClient implements CurrencyClient {
     private Mono<String> createWebClientEntity() {
         return WebClient.create().get()
             .uri(uriBuilder ->
-                uriBuilder.path(API_URL)
-                    .queryParam("access_key", ACCESS_KEY)
+                uriBuilder.path(apiUrl)
+                    .queryParam("access_key", accessKey)
                     .queryParam("currencies", currencies())
-                    .queryParam("source", SOURCE)
-                    .queryParam("format", FORMAT)
+                    .queryParam("source", source)
+                    .queryParam("format", format)
                     .build()
             ).retrieve()
             .bodyToMono(String.class);
