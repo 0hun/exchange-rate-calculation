@@ -1,6 +1,7 @@
 package com.example.exchangeratecalculation.domain;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Getter;
 
@@ -29,9 +30,14 @@ public enum Country {
             .orElseThrow(IllegalArgumentException::new);
     }
 
-    public static String currencies() {
+    public static List<Country> currencies() {
         return Arrays.stream(values())
-            .map(country -> country.name())
+            .collect(Collectors.toList());
+    }
+
+    public static String currenciesWithComma() {
+        return Arrays.stream(values())
+            .map(Enum::name)
             .collect(Collectors.joining(","));
     }
 }
