@@ -1,8 +1,7 @@
 package com.example.exchangeratecalculation.infra;
 
-import static com.example.exchangeratecalculation.domain.Country.currencies;
+import static com.example.exchangeratecalculation.domain.Country.currenciesWithComma;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -35,7 +34,7 @@ public class CurrencyLayerClient implements CurrencyClient {
             .uri(uriBuilder ->
                 uriBuilder.path(apiUrl)
                     .queryParam("access_key", accessKey)
-                    .queryParam("currencies", currencies())
+                    .queryParam("currencies", currenciesWithComma())
                     .queryParam("source", source)
                     .queryParam("format", format)
                     .build()
